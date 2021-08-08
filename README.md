@@ -12,7 +12,7 @@
 
 ## Setup:
 1. clone the repo.
-2. copy start code.
+2. copy starter code.
 3. npm i.
 
 
