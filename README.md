@@ -1,6 +1,8 @@
 
 
 # RESTy :Phase 1
+
+## Author: Ayah Zaareer
  
 ## Test CI:
 [URL](https://github.com/AyahZaareer/RESTy/actions)
