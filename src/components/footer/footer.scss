@@ -1,0 +1,12 @@
+$backgroundColor: rgba(128, 76, 9, 0.938);
+body{
+    footer {
+    background: $backgroundColor;
+    border-top: 1px solid #eee;
+    padding: 1em 3em;
+    margin: 0;
+    color:white !important;
+    text-align: center;
+  }
+
+}
