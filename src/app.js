@@ -19,9 +19,12 @@ class App extends React.Component {
     };
   }
 
-  callApi = (requestParams) => {
+  callApi = (requestParams, inputText) => {
     // mock output
     const data = {
+      Headers: {
+        "cache-control": 'string no-cache'
+      },
       count: 2,
       results: [
         { name: 'fake thing 1', url: 'http://fakethings.com/1' },
