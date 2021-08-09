@@ -13,7 +13,8 @@
 
 
 ## Pull Request:
-[URL](https://github.com/AyahZaareer/RESTy/pull/1)
+  - pull-request#1 :[URL](https://github.com/AyahZaareer/RESTy/pull/1)
+  -pull-request#2  :[URL](https://github.com/AyahZaareer/RESTy/pull/2)
 
 ## Setup:
 1. clone the repo.
