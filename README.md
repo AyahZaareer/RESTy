@@ -7,6 +7,9 @@
 ## Test CI:
 [URL](https://github.com/AyahZaareer/RESTy/actions)
 
+## Deploy:
+[URI](https://angry-allen-9e3553.netlify.app)
+
 
 
 ## Pull Request:
