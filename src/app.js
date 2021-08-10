@@ -20,7 +20,7 @@ class App extends React.Component {
     };
   }
 
-  callApi = (requestParams, inputText) => {
+  callApi = (requestParams, inputText, newData) => {
     // mock output
     const data = {
       Headers: {
@@ -32,7 +32,7 @@ class App extends React.Component {
         { name: 'fake thing 2', url: 'http://fakethings.com/2' },
       ],
     };
-    this.setState({ data, requestParams, loading: true });
+    this.setState({ data: newData, requestParams, loading: true });
   }
 
   render() {

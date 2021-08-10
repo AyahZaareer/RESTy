@@ -6,20 +6,23 @@ import './form.scss';
 
 function Form(props) {
   const [method, setMethod] = useState('get');
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
   const [showText, setShowText] = useState(false);
-  const [inputText, setInputText] = useState('https://pokeapi.co/api/v2/pokemon');
+  const [inputText, setInputText] = useState('');
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const raw = await fetch('https://pokeapi.co/api/v2/pokemon')
+      const raw = await fetch(`${url}`)
       const data = await raw.json();
       const formData = {
         method: method,
         url: url,
       };
+      console.log('Data', data);
+
       console.log('formData', formData);
-      props.handleApiCall(formData, inputText);
+      console.log('url', url);
+      props.handleApiCall(formData, inputText, data.results);
 
 
     } catch (e) {

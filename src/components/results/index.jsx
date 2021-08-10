@@ -3,6 +3,7 @@ import './resultes.scss';
 import Loading from '../loading/loading'
 
 function Results(props) {
+  console.log('result', props.data);
 
   return (
     <section>
