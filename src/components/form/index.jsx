@@ -11,16 +11,27 @@ function Form(props) {
   const [inputText, setInputText] = useState('https://pokeapi.co/api/v2/pokemon');
   async function handleSubmit(e) {
     e.preventDefault();
-    const formData = {
-      method: method,
-      url: url,
-    };
-    console.log('formData', formData);
-    props.handleApiCall(formData, inputText);
+    try {
+      const raw = await fetch('https://pokeapi.co/api/v2/pokemon')
+      const data = await raw.json();
+      const formData = {
+        method: method,
+        url: url,
+      };
+      console.log('formData', formData);
+      props.handleApiCall(formData, inputText);
+
+
+    } catch (e) {
+      console.error(e);
+
+    }
+
+
 
   }
   function handeleText(e) {
-    setShowText(true);
+    setShowText(!showText);
     setMethod(e.target.id);
   }
   function handeleInputText(e) {

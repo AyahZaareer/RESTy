@@ -16,6 +16,7 @@ class App extends React.Component {
     this.state = {
       data: null,
       requestParams: {},
+      loading: false,
     };
   }
 
@@ -31,7 +32,7 @@ class App extends React.Component {
         { name: 'fake thing 2', url: 'http://fakethings.com/2' },
       ],
     };
-    this.setState({ data, requestParams });
+    this.setState({ data, requestParams, loading: true });
   }
 
   render() {
