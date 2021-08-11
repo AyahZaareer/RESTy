@@ -8,6 +8,7 @@ import Header from './components/header/index.jsx';
 import Footer from './components/footer/index.jsx';
 import Form from './components/form/index.jsx';
 import Results from './components/results/index.jsx';
+import List from './components/History-List/list';
 
 class App extends React.Component {
 
@@ -17,10 +18,12 @@ class App extends React.Component {
       data: null,
       requestParams: {},
       loading: false,
+      headers: null,
+      count: ''
     };
   }
 
-  callApi = (requestParams, inputText, newData) => {
+  callApi = (formData, headers, newData) => {
     // mock output
     const data = {
       Headers: {
@@ -32,8 +35,9 @@ class App extends React.Component {
         { name: 'fake thing 2', url: 'http://fakethings.com/2' },
       ],
     };
-    this.setState({ data: newData, requestParams, loading: true });
-    console.log('input app', inputText);
+    this.setState({ data: newData, requestParams: formData, loading: true, headers: headers, count: newData.count });
+    console.log('input app', this.state.data);
+    console.log('method/app', this.state.requestParams.method);
   }
 
 
@@ -43,8 +47,11 @@ class App extends React.Component {
         <Header />
         <div>Request Method: {this.state.requestParams.method}</div>
         <div>URL: {this.state.requestParams.url}</div>
+        <List URL={this.state.requestParams.url} />
         <Form handleApiCall={this.callApi} />
-        <Results data={this.state.data} />
+
+        <Results data={{ headers: this.state.headers, result: this.state.data, count: this.state.count }} />
+
         <Footer />
       </React.Fragment>
     );
