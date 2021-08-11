@@ -9,7 +9,7 @@ import Footer from './components/footer/index.jsx';
 import Form from './components/form/index.jsx';
 import Results from './components/results/index.jsx';
 import List from './components/History-List/list';
-
+import { BeatLoader } from 'react-spinners';
 class App extends React.Component {
 
   constructor(props) {
@@ -19,7 +19,8 @@ class App extends React.Component {
       requestParams: {},
       loading: false,
       headers: null,
-      count: ''
+      count: '',
+      load:true
     };
   }
 
@@ -51,9 +52,10 @@ class App extends React.Component {
         <div>Request Method: {this.state.requestParams.method}</div>
         <div>URL: {this.state.requestParams.url}</div>
         <List URL={this.state.requestParams.url} />
-        <Form handleApiCall={this.callApi} />
-
-        <Results data={{ headers: this.state.headers, result: this.state.data, count: this.state.count }} />
+        <Form changeLoading={this.changeLoading}handleApiCall={this.callApi} />
+{this.state.load?<BeatLoader load/>:       
+<Results data={{ headers: this.state.headers, result: this.state.data, count: this.state.count }} />
+}
 
         <Footer />
       </React.Fragment>

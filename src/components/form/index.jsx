@@ -44,9 +44,8 @@ function Form(props) {
         url: url,
 
       })
-      console.log('getItem', localStorage.getItem('history'));
 
-
+      props.changeLoading(false)
       if (!localStorage.getItem('history')) {
 
         setHistory([formData]);
@@ -67,6 +66,7 @@ function Form(props) {
 
     } catch (e) {
       console.error(e);
+      props.changeLoading(true)
 
     }
 
