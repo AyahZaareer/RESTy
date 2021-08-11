@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { setState } from 'react';
 
@@ -12,17 +13,23 @@ function Form(props) {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const raw = await fetch(`${url}`)
-      const data = await raw.json();
+      const data = await axios({
+        method: e.target.id,
+        url: url,
+
+      })
+      // const data = await raw.json();
       const formData = {
         method: method,
         url: url,
       };
+
       console.log('Data', data);
 
       console.log('formData', formData);
       console.log('url', url);
-      props.handleApiCall(formData, inputText, data.results);
+      props.handleApiCall(formData, inputText, data);
+      console.log('input', inputText);
 
 
     } catch (e) {

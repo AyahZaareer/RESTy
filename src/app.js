@@ -33,7 +33,9 @@ class App extends React.Component {
       ],
     };
     this.setState({ data: newData, requestParams, loading: true });
+    console.log('input app', inputText);
   }
+
 
   render() {
     return (
