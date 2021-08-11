@@ -39,6 +39,9 @@ class App extends React.Component {
     console.log('input app', this.state.data);
     console.log('method/app', this.state.requestParams.method);
   }
+  changeLoading=(load)=>{
+    this.setState({load:load})
+  }
 
 
   render() {
