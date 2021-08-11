@@ -16,7 +16,9 @@ class App extends React.Component {
     this.state = {
       data: null,
       requestParams: {},
-      loading: false,
+
+      load:true
+
     };
   }
 
@@ -34,6 +36,9 @@ class App extends React.Component {
     };
     this.setState({ data: newData, requestParams, loading: true });
   }
+  changeLoading=(load)=>{
+    this.setState({load:load})
+  }
 
   render() {
     return (
@@ -41,7 +46,8 @@ class App extends React.Component {
         <Header />
         <div>Request Method: {this.state.requestParams.method}</div>
         <div>URL: {this.state.requestParams.url}</div>
-        <Form handleApiCall={this.callApi} />
+        <Form changeLoading={this.changeLoading}handleApiCall={this.callApi} />
+      
         <Results data={this.state.data} />
         <Footer />
       </React.Fragment>
