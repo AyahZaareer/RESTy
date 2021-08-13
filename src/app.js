@@ -60,10 +60,11 @@ function App() {
 
 
       } else {
+        dispatch(addAction(requestParams));
         const data = await axios[requestParams.method](requestParams.url);
         setData({ data });
         setLoading(false);
-        dispatch(addAction(requestParams));
+
         console.log('method/app', requestParams);
 
 
