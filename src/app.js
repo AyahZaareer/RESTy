@@ -11,9 +11,33 @@ import Results from './components/results/index.jsx';
 import List from './components/History-List/list';
 import { BeatLoader } from 'react-spinners';
 import axios from 'axios';
+import './reducer/reducer';
 
 import { useEffect, useReducer } from 'react';
-import { historyAction, historyReducer, initialState } from './reducer/reducer.js';
+// import { initialState, historyReducer } from './reducer/reducer.js';
+// import { addAction } from './reducer/reducer.js';
+
+const initialState = {
+  history: [],
+}
+
+function historyReducer(state = initialState, action) {
+  const { type, payload } = action;
+  switch (type) {
+      case 'ADD-TO-HISTORY':
+          const history = [...state.history, payload.history]
+          return { history };
+      default:
+          return state;
+  }
+}
+
+function addAction(history) {
+  return {
+    type: 'ADD-TO-HISTORY',
+    payload: { history },
+  };
+}
 function App() {
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
@@ -28,7 +52,7 @@ function App() {
         const data = await axios[requestParams.method](requestParams.url, JSON.parse(requestBody));
         setData(data);
         setLoading(false);
-        dispatch(historyAction(requestParams));
+        dispatch(addAction(requestParams));
 
 
 
@@ -37,7 +61,7 @@ function App() {
         const data = await axios[requestParams.method](requestParams.url);
         setData({ data });
         setLoading(false);
-        dispatch(historyAction(requestParams));
+        dispatch(addAction(requestParams));
         console.log('method/app', requestParams);
 
 
@@ -78,7 +102,7 @@ function App() {
       setData({ data });
       setRequestParams(formData);
       console.log('fromData/app', formData);
-      dispatch(historyAction(formData));
+      dispatch(addAction(formData));
       setLoading(false);
 
     }
