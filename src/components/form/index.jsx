@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { setState } from 'react';
+
 // import {useEffect} from 'react'
 
 
@@ -11,26 +11,9 @@ function Form(props) {
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
   const [showText, setShowText] = useState(false);
   const [inputText, setInputText] = useState('');
-  const [history, setHistory] = useState(
-    JSON.parse(localStorage.getItem('history')) || []
-  );
-  const saveHistory = (data) => {
-    setHistory([...history, data]);
-    localStorage.setItem('history', JSON.stringify(history));
-  };
-
-  // useEffect(()=>{
-
-  //   const data = localStorage.getItem('data')
-
-  //   if(data){
-  //     setitem(JSON.parse(data))
-  //    }
-
-  //   },[])
-  console.log('history', history);
-
-  async function handleSubmit(e) {
+ 
+ 
+   function handleSubmit(e) {
     e.preventDefault();
     try {
       const formData = {
@@ -38,53 +21,40 @@ function Form(props) {
         url: url,
       };
       console.log('formData', formData);
-      console.log('e.tar.id', method);
-      const data = await axios({
-        method: e.target.id,
-        url: url,
-
-      })
-
-      props.changeLoading(false)
-      if (!localStorage.getItem('history')) {
-
-        setHistory([formData]);
-        localStorage.setItem('history', JSON.stringify(formData));
-      }
-      saveHistory(formData);
-
-      // const data = await raw.json();
+     
+      props.handleApiCall(formData,  inputText);
 
 
-      console.log('Data', data);
 
+      // console.log('Data', data);
 
-      console.log('url', url);
-      props.handleApiCall(formData, data.headers, data.data);
-      console.log('input', data.headers);
 
 
     } catch (e) {
       console.error(e);
-      props.changeLoading(true)
+      // props.changeLoading(true)
 
     }
 
-
+    // props.handleApiCall(formData, body);
 
   }
   async function handeleText(e) {
     setShowText(!showText);
-    await setMethod(e.target.id);
+    setMethod(e.target.id);
 
   }
   function handeleInputText(e) {
     setInputText(e.target.value);
+ 
   }
   async function handelMethod(e) {
-    await setMethod(e.target.id);
+    setMethod(e.target.id);
+
+    console.log('e.tar.id', e.target.id);
 
   }
+
 
 
 

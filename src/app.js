@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './app.scss';
 
@@ -10,57 +10,103 @@ import Form from './components/form/index.jsx';
 import Results from './components/results/index.jsx';
 import List from './components/History-List/list';
 import { BeatLoader } from 'react-spinners';
-class App extends React.Component {
+import axios from 'axios';
+import { useEffect, useReducer } from 'react';
+import { initialState, historyReducer, historyAction } from './reducer/reducer';
+function App() {
+  const [data, setData] = useState(null);
+  const [requestParams, setRequestParams] = useState({});
+  const [requestBody, setRequestBody] = useState({});
+  const [state, dispatch] = useReducer(historyReducer, initialState);
+  const [loading, setLoading] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      requestParams: {},
-      loading: false,
-      headers: null,
-      count: '',
-      load:true
-    };
-  }
 
-  callApi = (formData, headers, newData) => {
+  useEffect(async () => {
+    if (requestParams.url) {
+      if (requestBody) {
+        const data = await axios[requestParams.method](requestParams.url, JSON.parse(requestBody));
+        setData(data);
+        setLoading(false);
+        dispatch(historyAction(requestParams));
+        
+
+
+
+      } else {
+        const data = await axios[requestParams.method](requestParams.url);
+        setData({data});
+        setLoading(false);
+        dispatch(historyAction(requestParams));
+        console.log('method/app', requestParams);
+
+
+      }
+    }
+  }, [requestParams])
+
+  // console.log('method/app', requestParams.method);
+  console.log('data/app', data);
+
+
+
+
+
+  async function callApi(formData,requestBody) {
     // mock output
-    const data = {
-      Headers: {
-        "cache-control": 'string no-cache'
-      },
-      count: 2,
-      results: [
-        { name: 'fake thing 1', url: 'http://fakethings.com/1' },
-        { name: 'fake thing 2', url: 'http://fakethings.com/2' },
-      ],
-    };
-    this.setState({ data: newData, requestParams: formData, loading: true, headers: headers, count: newData.count });
-    console.log('input app', this.state.data);
-    console.log('method/app', this.state.requestParams.method);
-  }
-  changeLoading=(load)=>{
-    this.setState({load:load})
+    setLoading(true);
+    if (formData.url) {
+      setRequestBody(requestBody);
+      console.log('reqqqqqqqqqqqqqqbody',requestBody)
+      setRequestParams(formData);
+      console.log('fooooooooooooooorm',formData)
+     
+    } else {
+      const data = {
+        Headers: {
+          "cache-control": 'string no-cache'
+        },
+        count: 2,
+        method:formData.method,
+        results: [
+          { name: 'fake thing 1', url: 'http://fakethings.com/1' },
+          { name: 'fake thing 2', url: 'http://fakethings.com/2' },
+        ],
+      };
+
+
+      setData({ data });
+      setRequestParams(formData);
+      console.log('fromData/app', formData);
+      dispatch(historyAction(formData));
+      setLoading(false);
+
+    }
+
+    console.log('body/app', requestBody);
+    // console.log('requestParames',requestParams);
+
   }
 
 
-  render() {
-    return (
-      <React.Fragment>
-        <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
-        <List URL={this.state.requestParams.url} />
-        <Form changeLoading={this.changeLoading}handleApiCall={this.callApi} />
-{this.state.load?<BeatLoader load/>:       
-<Results data={{ headers: this.state.headers, result: this.state.data, count: this.state.count }} />
-}
 
-        <Footer />
-      </React.Fragment>
-    );
-  }
+
+  return (
+    <React.Fragment>
+      <Header />
+      <div>Request Method: {requestParams.method}</div>
+      <div>URL: {requestParams.url}</div>
+      {/* <List URL={this.state.requestParams.url} /> */}
+      <Form handleApiCall={callApi} />
+      {state.history.length ? <List history={state.history} /> : null}
+
+      {loading ? <BeatLoader loading /> : data &&
+        <Results data={data} />}
+
+
+      <Footer />
+    </React.Fragment>
+  );
+
 }
 
 export default App;
