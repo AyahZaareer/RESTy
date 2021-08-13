@@ -11,8 +11,9 @@ import Results from './components/results/index.jsx';
 import List from './components/History-List/list';
 import { BeatLoader } from 'react-spinners';
 import axios from 'axios';
+
 import { useEffect, useReducer } from 'react';
-import { initialState, historyReducer, historyAction } from './reducer/reducer';
+import { historyAction, historyReducer, initialState } from './reducer/reducer.js';
 function App() {
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
@@ -28,13 +29,13 @@ function App() {
         setData(data);
         setLoading(false);
         dispatch(historyAction(requestParams));
-        
+
 
 
 
       } else {
         const data = await axios[requestParams.method](requestParams.url);
-        setData({data});
+        setData({ data });
         setLoading(false);
         dispatch(historyAction(requestParams));
         console.log('method/app', requestParams);
@@ -51,22 +52,22 @@ function App() {
 
 
 
-  async function callApi(formData,requestBody) {
+  async function callApi(formData, requestBody) {
     // mock output
     setLoading(true);
     if (formData.url) {
       setRequestBody(requestBody);
-      console.log('reqqqqqqqqqqqqqqbody',requestBody)
+      console.log('reqqqqqqqqqqqqqqbody', requestBody)
       setRequestParams(formData);
-      console.log('fooooooooooooooorm',formData)
-     
+      console.log('fooooooooooooooorm', formData)
+
     } else {
       const data = {
         Headers: {
           "cache-control": 'string no-cache'
         },
         count: 2,
-        method:formData.method,
+        method: formData.method,
         results: [
           { name: 'fake thing 1', url: 'http://fakethings.com/1' },
           { name: 'fake thing 2', url: 'http://fakethings.com/2' },
