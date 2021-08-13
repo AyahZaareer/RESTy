@@ -24,11 +24,11 @@ const initialState = {
 function historyReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-      case 'ADD-TO-HISTORY':
-          const history = [...state.history, payload.history]
-          return { history };
-      default:
-          return state;
+    case 'ADD-TO-HISTORY':
+      const history = [...state.history, payload.history]
+      return { history };
+    default:
+      return state;
   }
 }
 
@@ -48,11 +48,13 @@ function App() {
 
   useEffect(async () => {
     if (requestParams.url) {
+
       if (requestBody) {
+        dispatch(addAction(requestParams));
         const data = await axios[requestParams.method](requestParams.url, JSON.parse(requestBody));
         setData(data);
         setLoading(false);
-        dispatch(addAction(requestParams));
+
 
 
 
