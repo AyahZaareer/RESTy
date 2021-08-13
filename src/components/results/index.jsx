@@ -13,16 +13,16 @@ function Results(props) {
 
   return (
     <div data-testid="result"  >
-      {props.data &&
+     
         <>
           "count : "
-          <JSONPretty data={props.data.count} />
+          <JSONPretty data={props.data.data.data.count} />
           "headers : "
-          <JSONPretty data={props.data.headers} />
+          <JSONPretty data={props.data.data.headers} />
           "results : "
-          <JSONPretty data={props.data.result} />
+          <JSONPretty data={props.data.data} />
         </>
-      }
+      
     </div>
     // <section>
     //   <pre data-testid="result">{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
