@@ -12,7 +12,7 @@ import List from './components/History-List/list';
 import { BeatLoader } from 'react-spinners';
 import axios from 'axios';
 import { useEffect, useReducer } from 'react';
-import { initialState, historyReducer, historyAction } from './reducer/reducer';
+import { historyAction, historyReducer, initialState } from './reducer/reducer';
 function App() {
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});

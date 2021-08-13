@@ -19,4 +19,5 @@ function historyAction(history) {
     }
 }
 
+
 module.exports = { historyAction, historyReducer, initialState }
