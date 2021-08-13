@@ -16,7 +16,7 @@
   - **pull-request#1** :[URL](https://github.com/AyahZaareer/RESTy/pull/1)
   - **pull-request#2** :[URL](https://github.com/AyahZaareer/RESTy/pull/3)
   - **pull-request#3** :[URL](https://github.com/AyahZaareer/RESTy/pull/6)
-  - **pull-request#3** :[URL](https://github.com/AyahZaareer/RESTy/pull/7)
+  - **pull-request#4** :[URL](https://github.com/AyahZaareer/RESTy/pull/7)
 
 ## Setup:
 1. clone the repo.
