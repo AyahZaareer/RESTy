@@ -52,6 +52,7 @@ function App() {
       if (requestBody) {
         dispatch(addAction(requestParams));
         const data = await axios[requestParams.method](requestParams.url, JSON.parse(requestBody));
+       
         setData(data);
         setLoading(false);
 
@@ -115,6 +116,12 @@ function App() {
 
   }
 
+  function showResultHis(data) {
+    setData(data);
+    console.log('resultApp', data);
+  }
+
+
 
 
 
@@ -125,7 +132,7 @@ function App() {
       <div>URL: {requestParams.url}</div>
       {/* <List URL={this.state.requestParams.url} /> */}
       <Form handleApiCall={callApi} />
-      {state.history.length ? <List history={state.history} /> : null}
+      {state.history.length ? <List history={state.history} showResultHis={showResultHis} /> : null}
 
       {loading ? <BeatLoader loading /> : data &&
         <Results data={data} />}
